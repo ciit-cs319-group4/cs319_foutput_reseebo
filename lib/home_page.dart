@@ -17,13 +17,13 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        backgroundColor: Colors.white,
         body: SafeArea(
           top: true,
           child: Align(
             alignment: Alignment.center,
             child: Padding(
-              padding: const EdgeInsets.only(top: 8.0),
+              padding: const EdgeInsets.only(top: 32.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
@@ -132,7 +132,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       width: 390,
                       height: 438,
                       decoration: BoxDecoration(
-                        color: Theme.of(context).secondaryHeaderColor,
+                        color: Colors.white,
                         boxShadow: [
                           BoxShadow(
                             blurRadius: 7,
@@ -152,12 +152,13 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     width: 524,
                     height: 72,
                     decoration: BoxDecoration(
-                      color: Theme.of(context).secondaryHeaderColor,
+                      color: Colors.white,
                       boxShadow: [
                         BoxShadow(
                           blurRadius: 4,
                           color: Color(0x33000000),
                           offset: Offset(0, -2),
+                          spreadRadius: 4,
                         ),
                       ],
                     ),
