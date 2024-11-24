@@ -1,4 +1,5 @@
 import 'package:cs319_foutput_reseebo/currency_page.dart';
+import 'package:cs319_foutput_reseebo/expense_page.dart';
 import 'package:cs319_foutput_reseebo/home_page.dart';
 import 'package:cs319_foutput_reseebo/income_page.dart';
 import 'package:cs319_foutput_reseebo/start.dart';
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const IncomePageWidget(),
+      home: const ExpensePageWidget(),
     );
   }
 }
