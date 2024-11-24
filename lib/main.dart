@@ -2,6 +2,7 @@ import 'package:cs319_foutput_reseebo/currency_page.dart';
 import 'package:cs319_foutput_reseebo/expense_page.dart';
 import 'package:cs319_foutput_reseebo/home_page.dart';
 import 'package:cs319_foutput_reseebo/income_page.dart';
+import 'package:cs319_foutput_reseebo/login_page.dart';
 import 'package:cs319_foutput_reseebo/start.dart';
 import 'package:cs319_foutput_reseebo/user_page.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const ExpensePageWidget(),
+      home: const LoginPageWidget(),
     );
   }
 }
