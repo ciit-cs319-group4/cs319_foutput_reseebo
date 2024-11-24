@@ -52,7 +52,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     width: double.infinity,
                     height: MediaQuery.of(context).size.height * 0.8,
                     decoration: BoxDecoration(
-                      color: Theme.of(context).secondaryHeaderColor,
+                      color: Colors.white,
                     ),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
@@ -208,7 +208,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           width: 390,
                           height: 471,
                           decoration: BoxDecoration(
-                            color: Theme.of(context).scaffoldBackgroundColor,
+                            color: Colors.white,
                             boxShadow: [
                               BoxShadow(
                                 blurRadius: 7,
@@ -318,7 +318,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     width: double.infinity,
                     height: 64,
                     decoration: BoxDecoration(
-                      color: Theme.of(context).scaffoldBackgroundColor,
+                      color: Colors.white,
                       boxShadow: [
                         BoxShadow(
                           blurRadius: 4,
