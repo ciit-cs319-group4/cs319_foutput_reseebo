@@ -70,65 +70,35 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Spacer(),
-                    Container(
-                      width: 313,
-                      height: 90,
-                      decoration: BoxDecoration(),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text(
-                              'RESEEBO',
-                              textAlign: TextAlign.center,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium
-                                  ?.copyWith(
-                                    fontFamily: 'Inter',
-                                    color: Colors.white,
-                                    fontSize: 52,
-                                    letterSpacing: 0.3,
-                                    fontWeight: FontWeight.w800,
-                                    fontStyle: FontStyle.italic,
-                                  ),
-                            ),
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
+                    Column(
+                      children: [
+                        Container(
+                          width: 313,
+                          height: 90,
+                          // Missing closing bracket here
+                          decoration: BoxDecoration(),
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 Text(
-                                  'Track your expenses, ',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyMedium
-                                      ?.copyWith(
-                                        fontFamily: 'Inter',
-                                        color: Color(0xFFE6E6E6),
-                                        letterSpacing: 0.0,
-                                        fontStyle: FontStyle.italic,
-                                      ),
-                                ),
-                                Text(
-                                  'See the benefits',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyMedium
-                                      ?.copyWith(
+                                  'RESEEBO',
+                                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                                         fontFamily: 'Inter',
                                         color: Colors.white,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.w600,
+                                        fontSize: 52,
+                                        letterSpacing: 0.3,
+                                        fontWeight: FontWeight.w800,
                                         fontStyle: FontStyle.italic,
                                       ),
                                 ),
                               ],
                             ),
-                          ],
-                        ),
-                      ),
+                          ),
+                        ), // Ensure this closes correctly
+                      ], // Ensure this closes correctly
                     ),
                     Align(
                       alignment: AlignmentDirectional(0, 0),
