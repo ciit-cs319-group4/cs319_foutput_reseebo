@@ -580,7 +580,7 @@ class _ExpensePageWidgetState extends State<ExpensePageWidget> {
                                     ),
                                   ),
                                   child: Text(
-                                    'Add Income',
+                                    'Add Expense',
                                     style: Theme.of(context)
                                         .textTheme
                                         .titleSmall

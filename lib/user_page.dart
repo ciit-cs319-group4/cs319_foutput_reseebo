@@ -237,7 +237,7 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                           borderRadius: BorderRadius.circular(24),
                         ),
                       ),
-                      child: Text('Button'),
+                      child: Text('Logout'),
                     ),
                     Spacer(),
                   ],
