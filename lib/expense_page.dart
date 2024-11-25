@@ -97,7 +97,7 @@ class _ExpensePageWidgetState extends State<ExpensePageWidget> {
                     height: 100,
                     constraints: BoxConstraints(
                       minWidth: MediaQuery.sizeOf(context).width,
-                      minHeight: MediaQuery.sizeOf(context).height * 1,
+                      minHeight: MediaQuery.sizeOf(context).height * 0.9,
                     ),
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -184,7 +184,7 @@ class _ExpensePageWidgetState extends State<ExpensePageWidget> {
                         ),
                         Container(
                           width: 462,
-                          height: 480,
+                          height: MediaQuery.sizeOf(context).height * 0.55,
                           decoration: BoxDecoration(
                             color: Colors.white,
                           ),
