@@ -75,7 +75,6 @@ class _SignupPageWidgetState extends State<SignupPageWidget> {
                     Spacer(),
                     Container(
                       width: 313,
-                      height: 90,
                       decoration: BoxDecoration(),
                       child: Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
