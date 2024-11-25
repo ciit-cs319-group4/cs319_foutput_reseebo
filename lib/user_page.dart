@@ -43,8 +43,6 @@ class _UserPageWidgetState extends State<UserPageWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Container(
-                width: 100,
-                height: 100,
                 constraints: BoxConstraints(
                   minWidth: MediaQuery.sizeOf(context).width,
                   minHeight: MediaQuery.sizeOf(context).height * 0.8,
@@ -52,223 +50,199 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                 decoration: BoxDecoration(
                   color: Colors.white,
                 ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Spacer(),
-                    Align(
-                      alignment: AlignmentDirectional(0, 0),
-                      child: Text(
-                        'Username',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              fontFamily: 'Inter',
-                              color: Color.fromRGBO(52, 117, 113, 1),
-                              fontSize: 40,
-                              letterSpacing: 0.0,
-                              fontWeight: FontWeight.bold,
-                            ),
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SizedBox(height: 20), // Add space above the content
+                      Align(
+                        alignment: AlignmentDirectional(0, 0),
+                        child: Text(
+                          'Username',
+                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                fontFamily: 'Inter',
+                                color: Color.fromRGBO(52, 117, 113, 1),
+                                fontSize: 40,
+                                letterSpacing: 0.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                        ),
                       ),
-                    ),
-                    Divider(
-                      thickness: 2,
-                      indent: 40,
-                      endIndent: 40,
-                      color: Color.fromRGBO(224, 227, 231, 1),
-                    ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
-                      child: Text(
-                        'Useremail@samplemail.com',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              fontFamily: 'Inter',
-                              color: Color(0xFF001A47),
-                              fontSize: 16,
-                              letterSpacing: 0.0,
-                            ),
+                      Divider(
+                        thickness: 2,
+                        indent: 40,
+                        endIndent: 40,
+                        color: Color.fromRGBO(224, 227, 231, 1),
                       ),
-                    ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Member since: ',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium
-                                ?.copyWith(
-                                  fontFamily: 'Inter',
-                                  color: Color(0xFF001A47),
-                                  fontSize: 16,
-                                  letterSpacing: 0.0,
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
+                        child: Text(
+                          'Useremail@samplemail.com',
+                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                fontFamily: 'Inter',
+                                color: Color(0xFF001A47),
+                                fontSize: 16,
+                                letterSpacing: 0.0,
+                              ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Member since: ',
+                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    fontFamily: 'Inter',
+                                    color: Color(0xFF001A47),
+                                    fontSize: 16,
+                                    letterSpacing: 0.0,
+                                  ),
+                            ),
+                            Text(
+                              '##/##/####',
+                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    fontFamily: 'Inter',
+                                    color: Color(0xFF001A47),
+                                    fontSize: 16,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 20), // Add space between the content and the container
+                      Container(
+                        width: 352,
+                        height: 120,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 4,
+                              color: Color(0x33000000),
+                              offset: Offset(0, 2),
+                              spreadRadius: 2,
+                            )
+                          ],
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Align(
+                              alignment: AlignmentDirectional(-0.8, -1),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+                                child: Text(
+                                  'Options',
+                                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                        fontFamily: 'Inter',
+                                        color: Color(0xFF001A47),
+                                        fontSize: 18,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                 ),
-                          ),
-                          Text(
-                            '##/##/####',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium
-                                ?.copyWith(
-                                  fontFamily: 'Inter',
-                                  color: Color(0xFF001A47),
-                                  fontSize: 16,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Spacer(),
-                    Container(
-                      width: 352,
-                      height: 120,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 4,
-                            color: Color(0x33000000),
-                            offset: Offset(
-                              0,
-                              2,
-                            ),
-                            spreadRadius: 2,
-                          )
-                        ],
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Align(
-                            alignment: AlignmentDirectional(-0.8, -1),
-                            child: Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
-                              child: Text(
-                                'Options',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium
-                                    ?.copyWith(
-                                      fontFamily: 'Inter',
-                                      color: Color(0xFF001A47),
-                                      fontSize: 18,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.w600,
-                                    ),
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 10, 0, 4),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Align(
-                                  alignment: AlignmentDirectional(-1, 0),
-                                  child: Text(
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 4),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Text(
                                     'Currency: ',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium
-                                        ?.copyWith(
+                                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                                           fontFamily: 'Inter',
                                           color: Color(0xFF001A47),
                                           fontSize: 16,
                                           letterSpacing: 0.0,
                                         ),
                                   ),
-                                ),
-                                Align(
-                                  alignment: AlignmentDirectional(0, 0),
-                                  child: Text(
+                                  Text(
                                     'Philippine Peso',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium
-                                        ?.copyWith(
+                                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                                           fontFamily: 'Inter',
                                           color: Color(0xFF001A47),
                                           fontSize: 16,
                                           letterSpacing: 0.0,
                                         ),
                                   ),
-                                ),
-                                IconButton(
-                                  icon: Icon(
-                                    Icons.arrow_forward_ios,
-                                    color: Color(0xFF347571),
-                                    size: 16,
+                                  IconButton(
+                                    icon: Icon(
+                                      Icons.arrow_forward_ios,
+                                      color: Color(0xFF347571),
+                                      size: 16,
+                                    ),
+                                    onPressed: () {
+                                      print('IconButton pressed ...');
+                                    },
                                   ),
-                                  onPressed: () {
-                                    print('IconButton pressed ...');
-                                  },
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 20), // Add space between the container and the button
+                      ElevatedButton(
+                        onPressed: () {
+                          print('Button pressed ...');
+                        },
+                        style: ElevatedButton.styleFrom(
+                          minimumSize: Size(180, 40),
+                          padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
+                          backgroundColor: Color(0xFFDD6B6B),
+                          textStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                                fontFamily: 'Inter Tight',
+                                color: Colors.white,
+                                letterSpacing: 0.0,
+                              ),
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(24),
                           ),
-                        ],
-                      ),
-                    ),
-                    Spacer(),
-                    ElevatedButton(
-                      onPressed: () {
-                        print('Button pressed ...');
-                      },
-                      style: ElevatedButton.styleFrom(
-                        minimumSize: Size(180, 40),
-                        padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
-                        backgroundColor: Color(0xFFDD6B6B),
-                        textStyle:
-                            Theme.of(context).textTheme.titleSmall?.copyWith(
-                                  fontFamily: 'Inter Tight',
-                                  color: Colors.white,
-                                  letterSpacing: 0.0,
-                                ),
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(24),
                         ),
+                        child: Text('Logout'),
                       ),
-                      child: Text('Logout'),
-                    ),
-                    Spacer(),
-                  ],
-                ),
-              ),
-              Align(
-                alignment: AlignmentDirectional(0, 0),
-                child: Container(
-                  width: 524,
-                  height: 64,
-                  constraints: BoxConstraints(
-                    minHeight: MediaQuery.sizeOf(context).height * 0.1,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        blurRadius: 4,
-                        color: Color(0x33000000),
-                        offset: Offset(
-                          0,
-                          -2,
-                        ),
-                      )
+                      SizedBox(height: 20), // Add space below the button
                     ],
                   ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      IconButton(
+                ),
+              ),
+              SafeArea(
+                child: Align(
+                  alignment: AlignmentDirectional(0, 0),
+                  child: Container(
+                    width: 524,
+                    height: 64,
+                    constraints: BoxConstraints(
+                      minHeight: MediaQuery.sizeOf(context).height * 0.1,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 4,
+                          color: Color(0x33000000),
+                          offset: Offset(
+                            0,
+                            -2,
+                          ),
+                        )
+                      ],
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        IconButton(
                           icon: const Icon(Icons.bar_chart,
                               color: Color(0xFF001A47), size: 32),
                           onPressed: () {
@@ -289,11 +263,12 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                             print('Profile pressed');
                           },
                         ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ],
+              ],
           ),
         ),
       ),
