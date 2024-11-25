@@ -204,154 +204,157 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           ),
                         ),
                         // Activities container
-                        Container(
-                          width: 390,
-                          height: 471,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                blurRadius: 7,
-                                color: const Color(0x33484747),
-                                offset: const Offset(2, -3),
-                                spreadRadius: 4,
-                              )
-                            ],
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              topRight: Radius.circular(20),
-                            ),
-                          ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(22, 18, 22, 0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    const Text(
-                                      'Activities',
-                                      style: TextStyle(
-                                        fontFamily: 'Inter',
-                                        color: Color(0xFF001A47),
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.w600,
-                                      ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16), // Add side spacing
+                            child: Container(
+                              width: 450, // Adjust width to 90%
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                    blurRadius: 7,
+                                    color: const Color(0x33484747),
+                                    offset: const Offset(2, -3),
+                                    spreadRadius: 4,
+                                  ),
+                                ],
+                                borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(20),
+                                  topRight: Radius.circular(20),
+                                ),
+                              ),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(22, 18, 22, 0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: const [
+                                        Text(
+                                          'Activities',
+                                          style: TextStyle(
+                                            fontFamily: 'Inter',
+                                            color: Color(0xFF001A47),
+                                            fontSize: 22,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                ),
-                              ),
-                              const Divider(
-                                thickness: 1,
-                                indent: 12,
-                                endIndent: 12,
-                                color: Color(0xFFC4C4C4),
-                              ),
-                              Expanded(
-                                child: ListView.builder(
-                                  itemCount: 2, 
-                                  itemBuilder: (context, index) {
-                                    return Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 4),
-                                      child: Container(
-                                        width: 340,
-                                        height: 60,
-                                        decoration: BoxDecoration(
-                                          color: Theme.of(context)
-                                              .scaffoldBackgroundColor,
-                                          boxShadow: [
-                                            BoxShadow(
-                                              blurRadius: 4,
-                                              color: const Color(0x33001A47),
-                                              offset: const Offset(0, 3),
-                                            )
-                                          ],
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            const Padding(
-                                              padding: EdgeInsets.only(left: 8),
-                                              child: Icon(Icons.monetization_on,
-                                                  color: Color(0xFF347571),
-                                                  size: 24),
+                                  ),
+                                  const Divider(
+                                    thickness: 1,
+                                    indent: 12,
+                                    endIndent: 12,
+                                    color: Color(0xFFC4C4C4),
+                                  ),
+                                  Expanded(
+                                    child: ListView.builder(
+                                      itemCount: 2,
+                                      itemBuilder: (context, index) {
+                                        return Padding(
+                                          padding: const EdgeInsets.symmetric(vertical: 4),
+                                          child: Container(
+                                            width: double.infinity, // Stretch to fill available space
+                                            height: 60,
+                                            decoration: BoxDecoration(
+                                              color: Theme.of(context).scaffoldBackgroundColor,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  blurRadius: 4,
+                                                  color: const Color(0x33001A47),
+                                                  offset: const Offset(0, 3),
+                                                )
+                                              ],
+                                              borderRadius: BorderRadius.circular(10),
                                             ),
-                                            const Padding(
-                                              padding: EdgeInsets.only(left: 4),
-                                              child: Text(
-                                                'Name of expense/income',
-                                                style: TextStyle(
-                                                  fontFamily: 'Inter',
-                                                  fontWeight: FontWeight.w500,
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                const Padding(
+                                                  padding: EdgeInsets.only(left: 8),
+                                                  child: Icon(
+                                                    Icons.monetization_on,
+                                                    color: Color(0xFF347571),
+                                                    size: 24,
+                                                  ),
                                                 ),
-                                              ),
+                                                const Padding(
+                                                  padding: EdgeInsets.only(left: 4),
+                                                  child: Text(
+                                                    'Name of expense/income',
+                                                    style: TextStyle(
+                                                      fontFamily: 'Inter',
+                                                      fontWeight: FontWeight.w500,
+                                                    ),
+                                                  ),
+                                                ),
+                                                const Spacer(),
+                                                IconButton(
+                                                  icon: const Icon(
+                                                    Icons.more_vert,
+                                                    color: Color(0xFF5EC57E),
+                                                    size: 24,
+                                                  ),
+                                                  onPressed: () {
+                                                    print('More options pressed');
+                                                  },
+                                                ),
+                                              ],
                                             ),
-                                            const Spacer(),
-                                            IconButton(
-                                              icon: const Icon(Icons.more_vert,
-                                                  color: Color(0xFF5EC57E),
-                                                  size: 24),
-                                              onPressed: () {
-                                                print('More options pressed');
-                                              },
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
                         ),
                       ],
                     ),
                   ),
                   // Bottom navigation bar
-                  Container(
-                    width: double.infinity,
-                    height: 64,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 4,
-                          color: const Color(0x33000000),
-                          offset: const Offset(0, -2),
-                        )
-                      ],
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        IconButton(
-                          icon: const Icon(Icons.bar_chart,
-                              color: Color(0xFF001A47), size: 32),
-                          onPressed: () {
-                            print('Bar Chart pressed');
-                          },
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.home,
-                              color: Color(0xFF001A47), size: 32),
-                          onPressed: () {
-                            print('Home pressed');
-                          },
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.person,
-                              color: Color(0xFF001A47), size: 32),
-                          onPressed: () {
-                            print('Profile pressed');
-                          },
-                        ),
-                      ],
+                  Expanded(
+                    child: Container(
+                      width: double.infinity,
+                      height: 64,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 4,
+                            color: const Color(0x33000000),
+                            offset: const Offset(0, -2),
+                          )
+                        ],
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          IconButton(
+                            icon: const Icon(Icons.bar_chart, color: Color(0xFF001A47), size: 32),
+                            onPressed: () {
+                              print('Bar Chart pressed');
+                            },
+                          ),
+                          IconButton(
+                            icon: const Icon(Icons.home, color: Color(0xFF001A47), size: 32),
+                            onPressed: () {
+                              print('Home pressed');
+                            },
+                          ),
+                          IconButton(
+                            icon: const Icon(Icons.person, color: Color(0xFF001A47), size: 32),
+                            onPressed: () {
+                              print('Profile pressed');
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
