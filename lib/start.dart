@@ -66,7 +66,7 @@ class _StartWidgetState extends State<StartWidget> {
                             'See the benefits',
                             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                                   fontFamily: 'Inter',
-                                  color: Colors.white,
+                                  color: const Color.fromARGB(255, 228, 227, 227),
                                   fontWeight: FontWeight.w600,
                                   fontStyle: FontStyle.italic,
                                 ),
@@ -102,9 +102,19 @@ class _StartWidgetState extends State<StartWidget> {
                         onPressed: () {
                           print('Login pressed ...');
                         },
-                        child: Text(
-                          'Login',
-                          style: TextStyle(color: Colors.white),
+                        child: Text.rich(
+                          TextSpan(
+                            children: [
+                              TextSpan(
+                                text: 'Already have an account? ',
+                                style: TextStyle(color: const Color.fromARGB(255, 199, 199, 199)),
+                              ),
+                              TextSpan(
+                                text: 'Login',
+                                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       Expanded(child: SizedBox.shrink()), 
