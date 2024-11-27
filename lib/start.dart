@@ -79,7 +79,7 @@ class _StartWidgetState extends State<StartWidget> {
                         width: 250,
                         child: ElevatedButton(
                           onPressed: () {
-                            print('Button pressed ...');
+                            Navigator.pushNamed(context,'/signup');
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Color(0xFF2E5B59),
@@ -100,7 +100,7 @@ class _StartWidgetState extends State<StartWidget> {
                       ),
                       TextButton(
                         onPressed: () {
-                          print('Login pressed ...');
+                          Navigator.pushNamed(context,'/login');
                         },
                         child: Text.rich(
                           TextSpan(

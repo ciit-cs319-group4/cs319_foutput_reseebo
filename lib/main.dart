@@ -40,7 +40,21 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const HomePageWidget(),
+
+      //Defining the initial route
+      initialRoute: '/',
+      //Defining named routes 
+      routes:{
+          '/': (context) => const StartWidget(), // Start page (Finished in routing)
+          '/signup': (context) => const SignupPageWidget(), // Signup page (Finished in routing)
+          '/login': (context) => const LoginPageWidget(), // Login page (Finished in routing)
+          '/home': (context) => const HomePageWidget(), // Home page (Finished in routing)
+          '/user': (context) => const UserPageWidget(), // User page (Finished in routing)
+          '/income': (context) => const IncomePageWidget(), // Income page (Finished in routing)
+          '/expense': (context) => const ExpensePageWidget(), // Expense page (Finished in routing)
+          '/currency': (context) => const CurrencyPageWidget(), // Currency page (Finished in routing)
+      }
+  
     );
   }
 }

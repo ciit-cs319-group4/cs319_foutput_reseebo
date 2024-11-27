@@ -300,8 +300,7 @@ class _ExpensePageWidgetState extends State<ExpensePageWidget> {
                                                   BorderRadius.circular(8),
                                             ),
                                             filled: true,
-                                            fillColor:
-                                                Colors.white,
+                                            fillColor: Colors.white,
                                           ),
                                           style: Theme.of(context)
                                               .textTheme
@@ -419,8 +418,7 @@ class _ExpensePageWidgetState extends State<ExpensePageWidget> {
                                                   BorderRadius.circular(8),
                                             ),
                                             filled: true,
-                                            fillColor:
-                                                Colors.white,
+                                            fillColor: Colors.white,
                                           ),
                                           style: Theme.of(context)
                                               .textTheme
@@ -478,6 +476,7 @@ class _ExpensePageWidgetState extends State<ExpensePageWidget> {
                                       ),
                                       Container(
                                         width: 280,
+                                        //width: double .infinity, // Ensure the container stretches fully
                                         child: TextFormField(
                                           controller: _model.textController3,
                                           focusNode: _model.textFieldFocusNode3,
@@ -559,7 +558,7 @@ class _ExpensePageWidgetState extends State<ExpensePageWidget> {
                                   ),
                                 ),
                               ),
-                              Padding(
+                              Padding( 
                                 padding:
                                     EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
                                 child: ElevatedButton(

@@ -152,7 +152,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                               color: Color(0xFF347571),
                                               size: 16),
                                           onPressed: () {
-                                            print('Add Income pressed');
+                                            Navigator.pushNamed(context,'/income'); // add income button
                                           },
                                         ),
                                       ),
@@ -183,7 +183,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                         child: const Icon(Icons.remove,
                                             color: Color(0xFF347571), size: 16),
                                         onPressed: () {
-                                          print('Remove Expense pressed');
+                                         Navigator.pushNamed(context,'/expense'); // remove expense button
                                         },
                                       ),
                                       const SizedBox(width: 8),
@@ -338,19 +338,19 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           IconButton(
                             icon: const Icon(Icons.bar_chart, color: Color(0xFF001A47), size: 32),
                             onPressed: () {
-                              print('Bar Chart pressed');
+                               // Navigator.pushNamed(context,'/income');// bar chart
                             },
                           ),
                           IconButton(
                             icon: const Icon(Icons.home, color: Color(0xFF001A47), size: 32),
                             onPressed: () {
-                              print('Home pressed');
+                             Navigator.pushNamed(context,'/home');// home 
                             },
                           ),
                           IconButton(
                             icon: const Icon(Icons.person, color: Color(0xFF001A47), size: 32),
                             onPressed: () {
-                              print('Profile pressed');
+                               Navigator.pushNamed(context,'/user'); // user profile
                             },
                           ),
                         ],

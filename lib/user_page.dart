@@ -181,7 +181,7 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                                       size: 16,
                                     ),
                                     onPressed: () {
-                                      print('IconButton pressed ...');
+                                       Navigator.pushNamed(context,'/currency'); // icon button for currency
                                     },
                                   ),
                                 ],
@@ -193,7 +193,7 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                       SizedBox(height: 20), // Add space between the container and the button
                       ElevatedButton(
                         onPressed: () {
-                          print('Button pressed ...');
+                           Navigator.pushNamed(context,'/login'); // logout button
                         },
                         style: ElevatedButton.styleFrom(
                           minimumSize: Size(180, 40),
@@ -246,21 +246,21 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                           icon: const Icon(Icons.bar_chart,
                               color: Color(0xFF001A47), size: 32),
                           onPressed: () {
-                            print('Bar Chart pressed');
+                             Navigator.pushNamed(context,'/income'); //Bar chart
                           },
                         ),
                         IconButton(
                           icon: const Icon(Icons.home,
-                              color: Color(0xFF001A47), size: 32),
+                              color: Color(0xFF001A47), size: 32), // Home
                           onPressed: () {
-                            print('Home pressed');
+                             Navigator.pushNamed(context,'/home');
                           },
                         ),
                         IconButton(
                           icon: const Icon(Icons.person,
-                              color: Color(0xFF001A47), size: 32),
+                              color: Color(0xFF001A47), size: 32), // User profile
                           onPressed: () {
-                            print('Profile pressed');
+                             Navigator.pushNamed(context,'/user');
                           },
                         ),
                       ],

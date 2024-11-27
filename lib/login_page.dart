@@ -355,7 +355,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                 EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
                             child: ElevatedButton(
                               onPressed: () {
-                                print('Button pressed ...');
+                                 Navigator.pushNamed(context,'/home');
                               },
                               style: ElevatedButton.styleFrom(
                                 minimumSize:
@@ -407,7 +407,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                 alignment: AlignmentDirectional(0, 0),
                                 child: TextButton(
                                   onPressed: () {
-                                    print('Login pressed ...');
+                                    Navigator.pushNamed(context,'/signup');
                                   },
                                   child: Text(
                                     'Sign Up',
