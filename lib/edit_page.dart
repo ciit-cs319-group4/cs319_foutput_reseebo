@@ -5,14 +5,14 @@ import 'package:provider/provider.dart';
 import 'edit_page_model.dart';
 export 'edit_page_model.dart';
 
-class ExpensePageWidget extends StatefulWidget {
-  const ExpensePageWidget({super.key});
+class EditPageWidget extends StatefulWidget {
+  const EditPageWidget({super.key});
 
   @override
-  State<ExpensePageWidget> createState() => _ExpensePageWidgetState();
+  State<EditPageWidget> createState() => _ExpensePageWidgetState();
 }
 
-class _ExpensePageWidgetState extends State<ExpensePageWidget> {
+class _ExpensePageWidgetState extends State<EditPageWidget> {
   late EditPageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();

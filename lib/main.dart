@@ -6,6 +6,7 @@ import 'package:cs319_foutput_reseebo/login_page.dart';
 import 'package:cs319_foutput_reseebo/signup_page.dart';
 import 'package:cs319_foutput_reseebo/start.dart';
 import 'package:cs319_foutput_reseebo/user_page.dart';
+import 'package:cs319_foutput_reseebo/edit_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -53,6 +54,7 @@ class MyApp extends StatelessWidget {
           '/income': (context) => const IncomePageWidget(), // Income page (Finished in routing)
           '/expense': (context) => const ExpensePageWidget(), // Expense page (Finished in routing)
           '/currency': (context) => const CurrencyPageWidget(), // Currency page (Finished in routing)
+          '/edit': (context) => const EditPageWidget(), // Edit page ()
       }
   
     );

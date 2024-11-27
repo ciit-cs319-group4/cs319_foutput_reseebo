@@ -332,7 +332,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                     size: 24,
                                                   ),
                                                   onPressed: () {
-                                                    print('Edit activity');
+                                                    Navigator.pushNamed(context,'/edit');
                                                   },
                                                 ),
                                                 // Delete activity button
