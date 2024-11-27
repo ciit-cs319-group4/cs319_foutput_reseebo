@@ -6,10 +6,18 @@ import 'package:cs319_foutput_reseebo/login_page.dart';
 import 'package:cs319_foutput_reseebo/signup_page.dart';
 import 'package:cs319_foutput_reseebo/start.dart';
 import 'package:cs319_foutput_reseebo/user_page.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'package:cs319_foutput_reseebo/edit_page.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized(); 
+  
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(const MyApp());
 }
 

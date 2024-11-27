@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'login_page_model.dart';
 export 'login_page_model.dart';
@@ -13,30 +14,47 @@ class LoginPageWidget extends StatefulWidget {
 }
 
 class _LoginPageWidgetState extends State<LoginPageWidget> {
-  late LoginPageModel _model;
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final scaffoldKey = GlobalKey<ScaffoldState>();
+  TextEditingController? emailController;
+  TextEditingController? passwordController;
 
   @override
   void initState() {
     super.initState();
-    _model = LoginPageModel();
-
-    _model.textController1 ??= TextEditingController();
-    _model.textFieldFocusNode1 ??= FocusNode();
-
-    _model.textController2 ??= TextEditingController();
-    _model.textFieldFocusNode2 ??= FocusNode();
-
-    _model.textController3 ??= TextEditingController();
-    _model.textFieldFocusNode3 ??= FocusNode();
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
   }
 
   @override
   void dispose() {
-    _model.dispose();
-
+    emailController?.dispose();
+    passwordController?.dispose();
     super.dispose();
+  }
+
+  Future<void> _loginWithEmailAndPassword() async {
+    final email = emailController?.text.trim();
+    final password = passwordController?.text.trim();
+
+    if (email == null || password == null || email.isEmpty || password.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Please fill in all fields')),
+      );
+      return;
+    }
+
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      Navigator.pushNamed(context, '/home');
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error: ${e.toString()}')),
+      );
+    }
   }
 
   @override
@@ -75,7 +93,6 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                         Container(
                           width: 313,
                           height: 90,
-                          // Missing closing bracket here
                           decoration: BoxDecoration(),
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
@@ -97,24 +114,23 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                               ],
                             ),
                           ),
-                        ), // Ensure this closes correctly
-                      ], // Ensure this closes correctly
+                        ),
+                      ],
                     ),
                     Align(
                       alignment: AlignmentDirectional(0, 0),
                       child: Container(
                         width: 347,
-                        height: 225,
+                        height: 160,
                         decoration: BoxDecoration(),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Container(
                               width: 280,
                               child: TextFormField(
-                                controller: _model.textController1,
-                                focusNode: _model.textFieldFocusNode1,
+                                controller: emailController,
                                 autofocus: false,
                                 obscureText: false,
                                 decoration: InputDecoration(
@@ -176,95 +192,14 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                       letterSpacing: 0.0,
                                     ),
                                 cursorColor: Colors.black,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'This field cannot be empty';
-                                  }
-                                  return null;
-                                },
                               ),
                             ),
                             Container(
                               width: 280,
                               child: TextFormField(
-                                controller: _model.textController2,
-                                focusNode: _model.textFieldFocusNode2,
+                                controller: passwordController,
                                 autofocus: false,
-                                obscureText: false,
-                                decoration: InputDecoration(
-                                  isDense: true,
-                                  labelStyle: Theme.of(context)
-                                      .textTheme
-                                      .labelMedium
-                                      ?.copyWith(
-                                        fontFamily: 'Inter',
-                                        color: Colors.white,
-                                        letterSpacing: 0.0,
-                                      ),
-                                  hintText: 'Username',
-                                  hintStyle: Theme.of(context)
-                                      .textTheme
-                                      .labelMedium
-                                      ?.copyWith(
-                                        fontFamily: 'Inter',
-                                        color: Color(0x96FFFFFF),
-                                        letterSpacing: 0.0,
-                                      ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color.fromARGB(255, 255, 89, 100),
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color.fromARGB(255, 255, 89, 100),
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  filled: true,
-                                  fillColor: Color(0x4C000000),
-                                ),
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium
-                                    ?.copyWith(
-                                      fontFamily: 'Inter',
-                                      color: Colors.white,
-                                      letterSpacing: 0.0,
-                                    ),
-                                cursorColor: Colors.black,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'This field cannot be empty';
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                            Container(
-                              width: 280,
-                              child: TextFormField(
-                                controller: _model.textController3,
-                                focusNode: _model.textFieldFocusNode3,
-                                autofocus: false,
-                                obscureText: false,
+                                obscureText: true,
                                 decoration: InputDecoration(
                                   isDense: true,
                                   labelStyle: Theme.of(context)
@@ -324,12 +259,6 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                       letterSpacing: 0.0,
                                     ),
                                 cursorColor: Colors.black,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'This field cannot be empty';
-                                  }
-                                  return null;
-                                },
                               ),
                             ),
                           ],
@@ -351,23 +280,16 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+                            padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
                             child: ElevatedButton(
-                              onPressed: () {
-                                 Navigator.pushNamed(context,'/home');
-                              },
+                              onPressed: _loginWithEmailAndPassword,
                               style: ElevatedButton.styleFrom(
-                                minimumSize:
-                                    Size(150, 45), // Sets the width and height
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16, 0, 16, 0),
-                                backgroundColor:
-                                    Color(0xFF347571), // Button color
-                                elevation: 0, // Removes shadow/elevation
+                                minimumSize: Size(150, 45), 
+                                padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
+                                backgroundColor: Color(0xFF347571), 
+                                elevation: 0,
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(
-                                      24), // Rounded corners
+                                  borderRadius: BorderRadius.circular(24),
                                 ),
                               ),
                               child: Text(
@@ -386,33 +308,32 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                           Row(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Align(
-                                alignment: AlignmentDirectional(0, -1),
+                              Text(
+                                'Don\'t have an account? ',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium
+                                    ?.copyWith(
+                                      fontFamily: 'Inter',
+                                      color: Color(0x8EE0E3E7),
+                                      fontSize: 14,
+                                    ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.pushNamed(context, '/signup');
+                                },
                                 child: Text(
-                                  'Don\'t have an account? ',
+                                  'Sign Up',
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyMedium
                                       ?.copyWith(
                                         fontFamily: 'Inter',
-                                        color: Color(0xFFE6E6E6),
-                                        fontSize: 12,
-                                        letterSpacing: 0.0,
+                                        color: Colors.white,
+                                        fontSize: 14,
                                       ),
-                                ),
-                              ),
-                              Align(
-                                alignment: AlignmentDirectional(0, 0),
-                                child: TextButton(
-                                  onPressed: () {
-                                    Navigator.pushNamed(context,'/signup');
-                                  },
-                                  child: Text(
-                                    'Sign Up',
-                                    style: TextStyle(color: Colors.white),
-                                  ),
                                 ),
                               ),
                             ],
