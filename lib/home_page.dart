@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
-import 'home_page_model.dart'; 
+import 'home_page_model.dart';
 export 'home_page_model.dart';
 
 class HomePageWidget extends StatefulWidget {
-  const HomePageWidget({Key? key})
-      : super(key: key);
+  const HomePageWidget({Key? key}) : super(key: key);
 
   @override
   State<HomePageWidget> createState() => _HomePageWidgetState();
@@ -18,16 +17,38 @@ class _HomePageWidgetState extends State<HomePageWidget> {
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
+  // Alert dialogue for delete activity button
+  void _showDeleteDialogue() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Delete Activity?'),
+            content: Text('Are you sure you want to delete this activity?'),
+            actions: [
+              MaterialButton(
+                onPressed: () {},
+                textColor: Color.fromARGB(255, 255, 89, 100),
+                child: Text('Yes'),
+              ),
+              MaterialButton(
+                onPressed: () {Navigator.pop(context);},
+                child: Text('No'),
+              )
+            ],
+          );
+        });
+  }
+
   @override
   void initState() {
     super.initState();
-    _model =
-        HomePageModel(); 
+    _model = HomePageModel();
   }
 
   @override
   void dispose() {
-    _model.dispose(); 
+    _model.dispose();
     super.dispose();
   }
 
@@ -141,8 +162,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                               borderRadius:
                                                   BorderRadius.circular(8),
                                             ),
-                                              backgroundColor: Colors.white,
-                                              side: const BorderSide(
+                                            backgroundColor: Colors.white,
+                                            side: const BorderSide(
                                               color: Color(0xFF347571),
                                               width: 2,
                                             ),
@@ -152,7 +173,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                               color: Color(0xFF347571),
                                               size: 16),
                                           onPressed: () {
-                                            Navigator.pushNamed(context,'/income'); // add income button
+                                            Navigator.pushNamed(context,
+                                                '/income'); // add income button
                                           },
                                         ),
                                       ),
@@ -183,7 +205,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                         child: const Icon(Icons.remove,
                                             color: Color(0xFF347571), size: 16),
                                         onPressed: () {
-                                         Navigator.pushNamed(context,'/expense'); // remove expense button
+                                          Navigator.pushNamed(context,
+                                              '/expense'); // remove expense button
                                         },
                                       ),
                                       const SizedBox(width: 8),
@@ -206,7 +229,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         // Activities container
                         Expanded(
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16), // Add side spacing
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16), // Add side spacing
                             child: Container(
                               width: 450, // Adjust width to 90%
                               decoration: BoxDecoration(
@@ -228,7 +252,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.fromLTRB(22, 18, 22, 0),
+                                    padding: const EdgeInsets.fromLTRB(
+                                        22, 18, 22, 0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       children: const [
@@ -255,26 +280,31 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       itemCount: 2,
                                       itemBuilder: (context, index) {
                                         return Padding(
-                                          padding: const EdgeInsets.symmetric(vertical: 4),
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 4),
                                           child: Container(
-                                            width: double.infinity, // Stretch to fill available space
+                                            width: double
+                                                .infinity, // Stretch to fill available space
                                             height: 60,
                                             decoration: BoxDecoration(
-                                              color: Theme.of(context).scaffoldBackgroundColor,
+                                              color: Colors.white,
                                               boxShadow: [
                                                 BoxShadow(
                                                   blurRadius: 4,
-                                                  color: const Color(0x33001A47),
-                                                  offset: const Offset(0, 3),
+                                                  color:
+                                                      const Color(0x33001A47),
+                                                  offset: const Offset(1, 3),
                                                 )
                                               ],
-                                              borderRadius: BorderRadius.circular(10),
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
                                             ),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
                                                 const Padding(
-                                                  padding: EdgeInsets.only(left: 8),
+                                                  padding:
+                                                      EdgeInsets.only(left: 8),
                                                   child: Icon(
                                                     Icons.monetization_on,
                                                     color: Color(0xFF347571),
@@ -282,25 +312,38 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                   ),
                                                 ),
                                                 const Padding(
-                                                  padding: EdgeInsets.only(left: 4),
+                                                  padding:
+                                                      EdgeInsets.only(left: 4),
                                                   child: Text(
                                                     'Name of expense/income',
                                                     style: TextStyle(
                                                       fontFamily: 'Inter',
-                                                      fontWeight: FontWeight.w500,
+                                                      fontWeight:
+                                                          FontWeight.w500,
                                                     ),
                                                   ),
                                                 ),
                                                 const Spacer(),
+                                                // Edit activity button
                                                 IconButton(
                                                   icon: const Icon(
-                                                    Icons.more_vert,
+                                                    Icons.edit,
                                                     color: Color(0xFF5EC57E),
                                                     size: 24,
                                                   ),
                                                   onPressed: () {
-                                                    print('More options pressed');
+                                                    print('Edit activity');
                                                   },
+                                                ),
+                                                // Delete activity button
+                                                IconButton(
+                                                  icon: const Icon(
+                                                    Icons
+                                                        .delete_forever_rounded,
+                                                    color: Color(0xFF5EC57E),
+                                                    size: 24,
+                                                  ),
+                                                  onPressed: _showDeleteDialogue
                                                 ),
                                               ],
                                             ),
@@ -336,21 +379,25 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           IconButton(
-                            icon: const Icon(Icons.bar_chart, color: Color(0xFF001A47), size: 32),
+                            icon: const Icon(Icons.bar_chart,
+                                color: Color(0xFF001A47), size: 32),
                             onPressed: () {
-                               // Navigator.pushNamed(context,'/income');// bar chart
+                              // Navigator.pushNamed(context,'/income');// bar chart
                             },
                           ),
                           IconButton(
-                            icon: const Icon(Icons.home, color: Color(0xFF001A47), size: 32),
+                            icon: const Icon(Icons.home,
+                                color: Color(0xFF001A47), size: 32),
                             onPressed: () {
-                             Navigator.pushNamed(context,'/home');// home 
+                              Navigator.pushNamed(context, '/home'); // home
                             },
                           ),
                           IconButton(
-                            icon: const Icon(Icons.person, color: Color(0xFF001A47), size: 32),
+                            icon: const Icon(Icons.person,
+                                color: Color(0xFF001A47), size: 32),
                             onPressed: () {
-                               Navigator.pushNamed(context,'/user'); // user profile
+                              Navigator.pushNamed(
+                                  context, '/user'); // user profile
                             },
                           ),
                         ],

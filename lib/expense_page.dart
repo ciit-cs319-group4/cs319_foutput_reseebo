@@ -274,7 +274,7 @@ class _ExpensePageWidgetState extends State<ExpensePageWidget> {
                                             ),
                                             focusedBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
-                                                color: Color(0x00000000),
+                                                color: Color(0xFF347571),
                                                 width: 1,
                                               ),
                                               borderRadius:
@@ -392,7 +392,7 @@ class _ExpensePageWidgetState extends State<ExpensePageWidget> {
                                             ),
                                             focusedBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
-                                                color: Color(0x00000000),
+                                                color: Color(0xFF347571),
                                                 width: 1,
                                               ),
                                               borderRadius:
@@ -509,7 +509,7 @@ class _ExpensePageWidgetState extends State<ExpensePageWidget> {
                                             ),
                                             focusedBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
-                                                color: Color(0x00000000),
+                                                color: Color(0xFF347571),
                                                 width: 1,
                                               ),
                                               borderRadius:

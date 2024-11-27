@@ -270,7 +270,7 @@ class _IncomePageWidgetState extends State<IncomePageWidget> {
                                         ),
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Color(0x00000000),
+                                            color: Color(0xFF347571),
                                             width: 1,
                                           ),
                                           borderRadius:
@@ -384,7 +384,7 @@ class _IncomePageWidgetState extends State<IncomePageWidget> {
                                         ),
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Color(0x00000000),
+                                            color: Color(0xFF347571),
                                             width: 1,
                                           ),
                                           borderRadius:
@@ -495,7 +495,7 @@ class _IncomePageWidgetState extends State<IncomePageWidget> {
                                         ),
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Color(0x00000000),
+                                            color: Color(0xFF347571),
                                             width: 1,
                                           ),
                                           borderRadius:
