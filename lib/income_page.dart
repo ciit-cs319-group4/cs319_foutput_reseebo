@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'income_page_model.dart';
 export 'income_page_model.dart';
@@ -22,21 +24,61 @@ class _IncomePageWidgetState extends State<IncomePageWidget> {
     super.initState();
     _model = IncomePageModel();
 
-    _model.textController1 ??= TextEditingController();
+    _model.textController1 ??= TextEditingController(); // For income amount
     _model.textFieldFocusNode1 ??= FocusNode();
 
-    _model.textController2 ??= TextEditingController();
+    _model.textController2 ??= TextEditingController(); // For income source
     _model.textFieldFocusNode2 ??= FocusNode();
 
-    _model.textController3 ??= TextEditingController();
+    _model.textController3 ??= TextEditingController(); // For income date
     _model.textFieldFocusNode3 ??= FocusNode();
   }
 
   @override
   void dispose() {
     _model.dispose();
-
     super.dispose();
+  }
+
+  Future<void> _addIncome() async {
+    final incomeAmount = _model.textController1?.text ?? '';
+    final incomeTitle= _model.textController2?.text ?? '';
+    final incomeDescription = _model.textController3?.text ?? '';
+    final User? user = FirebaseAuth.instance.currentUser;
+     
+
+    if (incomeAmount.isEmpty || incomeTitle.isEmpty || incomeDescription.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Please fill in all fields.')),
+      );
+      return;
+    }
+
+    try {
+      await FirebaseFirestore.instance.collection('transactions').add({
+        'amount': double.tryParse(incomeAmount) ?? 0.0,
+        'title': incomeTitle,
+        'description': incomeDescription,
+        'created_by':user!.uid,
+        'type': "INCOME",
+        'timestamp': FieldValue.serverTimestamp(),
+      });
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Income added successfully!')),
+      );
+
+      Navigator.pushNamed(context, '/home');
+
+      // Clear input fields after successful submission
+      _model.textController1?.clear();
+      _model.textController2?.clear();
+      _model.textController3?.clear();
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to add income: $e')),
+      );
+    }
   }
 
   @override
@@ -545,7 +587,7 @@ class _IncomePageWidgetState extends State<IncomePageWidget> {
                                 EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
                             child: ElevatedButton(
                               onPressed: () {
-                                print('Button pressed ...');
+                                _addIncome();
                               },
                               style: ElevatedButton.styleFrom(
                                 minimumSize:

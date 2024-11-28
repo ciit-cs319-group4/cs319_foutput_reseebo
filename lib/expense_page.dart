@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 
 import 'expense_page_model.dart';
 export 'expense_page_model.dart';
@@ -37,6 +40,46 @@ class _ExpensePageWidgetState extends State<ExpensePageWidget> {
     _model.dispose();
 
     super.dispose();
+  }
+
+  Future<void> _addExpense() async{
+    final expenseAmount = _model.textController1?.text ?? '';
+    final expenseTitle = _model.textController2?.text ?? '';
+    final expenseDescription = _model.textController3?.text ?? '';
+    final User? user = FirebaseAuth.instance.currentUser;
+
+    if (expenseAmount.isEmpty || expenseTitle.isEmpty || expenseDescription.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Please fill in all fields.')),
+      );
+      return;
+    }
+    
+    try{
+      await FirebaseFirestore.instance.collection('transactions').add({
+        'amount': double.tryParse(expenseAmount) ?? 0.0,
+        'title': expenseTitle,
+        'description': expenseDescription,
+        'created_by':user!.uid,
+        'type': "EXPENSE",
+        'timestamp': FieldValue.serverTimestamp(),
+
+      });
+        ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Expense added successfully!')),
+      );
+
+      Navigator.pushNamed(context, '/home');
+
+      // Clear input fields after successful submission
+      _model.textController1?.clear();
+      _model.textController2?.clear();
+      _model.textController3?.clear();
+    } catch(e){
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text ('Failed to add expense: $e')), 
+      );
+    }
   }
 
   @override
@@ -563,7 +606,7 @@ class _ExpensePageWidgetState extends State<ExpensePageWidget> {
                                     EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    print('Button pressed ...');
+                                    _addExpense();
                                   },
                                   style: ElevatedButton.styleFrom(
                                     minimumSize: Size(

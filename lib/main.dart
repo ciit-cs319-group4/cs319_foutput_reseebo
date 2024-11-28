@@ -55,14 +55,14 @@ class MyApp extends StatelessWidget {
       //Defining named routes 
       routes:{
           '/': (context) => const StartWidget(), // Start page (Finished in routing)
-          '/signup': (context) => const SignupPageWidget(), // Signup page (Finished in routing)
-          '/login': (context) => const LoginPageWidget(), // Login page (Finished in routing)
-          '/home': (context) => const HomePageWidget(), // Home page (Finished in routing)
-          '/user': (context) => const UserPageWidget(), // User page (Finished in routing)
-          '/income': (context) => const IncomePageWidget(), // Income page (Finished in routing)
-          '/expense': (context) => const ExpensePageWidget(), // Expense page (Finished in routing)
-          '/currency': (context) => const CurrencyPageWidget(), // Currency page (Finished in routing)
-          '/edit': (context) => const EditPageWidget(), // Edit page ()
+          '/signup': (context) => SignupPageWidget(), // Signup page (Finished in routing)
+          '/login': (context) => LoginPageWidget(), // Login page (Finished in routing)
+          '/home': (context) => HomePageWidget(), // Home page (Finished in routing)
+          '/user': (context) => UserPageWidget(), // User page (Finished in routing)
+          '/income': (context) => IncomePageWidget(), // Income page (Finished in routing)
+          '/expense': (context) => ExpensePageWidget(), // Expense page (Finished in routing)
+          '/currency': (context) => CurrencyPageWidget(), // Currency page (Finished in routing)
+          '/edit': (context) => EditPageWidget(), // Edit page ()
       }
   
     );

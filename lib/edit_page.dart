@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'transaction.dart' as txn;
 
 import 'edit_page_model.dart';
 export 'edit_page_model.dart';
@@ -9,36 +11,104 @@ class EditPageWidget extends StatefulWidget {
   const EditPageWidget({super.key});
 
   @override
-  State<EditPageWidget> createState() => _ExpensePageWidgetState();
+  State<EditPageWidget> createState() => _EditPageWidgetState();
 }
 
-class _ExpensePageWidgetState extends State<EditPageWidget> {
-  late EditPageModel _model;
-
+class _EditPageWidgetState extends State<EditPageWidget> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  late TextEditingController _titleController;
+  late TextEditingController _descriptionController;
+  late TextEditingController _amountController;
+  late txn.Transaction transaction;
 
   @override
   void initState() {
     super.initState();
-    _model = EditPageModel();
 
-    _model.textController1 ??= TextEditingController();
-    _model.textFieldFocusNode1 ??= FocusNode();
+    // Initialize controllers with default values
+    _titleController = TextEditingController();
+    _descriptionController = TextEditingController();
+    _amountController = TextEditingController();
+  }
 
-    _model.textController2 ??= TextEditingController();
-    _model.textFieldFocusNode2 ??= FocusNode();
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
 
-    _model.textController3 ??= TextEditingController();
-    _model.textFieldFocusNode3 ??= FocusNode();
+    final args = ModalRoute.of(context)?.settings.arguments;
+
+    if (args is txn.Transaction) {
+      transaction = args;
+
+      // Populate controllers with transaction data
+      _titleController.text = transaction.title;
+      _descriptionController.text = transaction.description;
+      _amountController.text = transaction.amount.toString();
+    } else {
+      // Defer showing the SnackBar
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          _showErrorSnackBar('Invalid transaction data.');
+          Navigator.pop(context); // Navigate back if invalid
+        }
+      });
+    }
   }
 
   @override
   void dispose() {
-    _model.dispose();
-
+    _titleController.dispose();
+    _descriptionController.dispose();
+    _amountController.dispose();
     super.dispose();
   }
 
+  void _showErrorSnackBar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
+    );
+  }
+
+  Future<void> _updateTransaction() async {
+    if (_formKey.currentState?.validate() ?? false) {
+      final title = _titleController.text.trim();
+      final description = _descriptionController.text.trim();
+      final amountText = _amountController.text.trim();
+
+      if (title.isEmpty || description.isEmpty || amountText.isEmpty) {
+        _showErrorSnackBar('Please fill in all fields.');
+        return;
+      }
+
+      final amount = double.tryParse(amountText);
+      if (amount == null) {
+        _showErrorSnackBar('Invalid amount entered.');
+        return;
+      }
+
+      transaction.title = title;
+      transaction.description = description;
+      transaction.amount = amount;
+
+      try {
+        await FirebaseFirestore.instance
+            .collection('transactions')
+            .doc(transaction.uid)
+            .update({
+          'title': transaction.title,
+          'description': transaction.description,
+          'amount': transaction.amount,
+        });
+
+        _showErrorSnackBar('Transaction updated successfully!');
+        Navigator.pop(context, transaction);
+      } catch (e) {
+        _showErrorSnackBar('Failed to update transaction: $e');
+      }
+    }
+  }
+  
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -194,7 +264,7 @@ class _ExpensePageWidgetState extends State<EditPageWidget> {
                               Align(
                                 alignment: AlignmentDirectional(-0.75, 0),
                                 child: Text(
-                                  'Enter Expense',
+                                  'Update Activity',
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyMedium
@@ -243,8 +313,8 @@ class _ExpensePageWidgetState extends State<EditPageWidget> {
                                       Container(
                                         width: 280,
                                         child: TextFormField(
-                                          controller: _model.textController1,
-                                          focusNode: _model.textFieldFocusNode1,
+                                          controller: _amountController,
+                                          //focusNode: _model.textFieldFocusNode1,
                                           autofocus: false,
                                           obscureText: false,
                                           decoration: InputDecoration(
@@ -361,8 +431,8 @@ class _ExpensePageWidgetState extends State<EditPageWidget> {
                                       Container(
                                         width: 280,
                                         child: TextFormField(
-                                          controller: _model.textController2,
-                                          focusNode: _model.textFieldFocusNode2,
+                                          controller: _titleController,
+                                          //focusNode: _model.textFieldFocusNode2,
                                           autofocus: false,
                                           obscureText: false,
                                           decoration: InputDecoration(
@@ -478,8 +548,8 @@ class _ExpensePageWidgetState extends State<EditPageWidget> {
                                         width: 280,
                                         //width: double .infinity, // Ensure the container stretches fully
                                         child: TextFormField(
-                                          controller: _model.textController3,
-                                          focusNode: _model.textFieldFocusNode3,
+                                          controller: _descriptionController,
+                                          //focusNode: _model.textFieldFocusNode3,
                                           autofocus: false,
                                           obscureText: false,
                                           decoration: InputDecoration(
@@ -563,7 +633,7 @@ class _ExpensePageWidgetState extends State<EditPageWidget> {
                                     EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    print('Button pressed ...');
+                                    _updateTransaction();
                                   },
                                   style: ElevatedButton.styleFrom(
                                     minimumSize: Size(
