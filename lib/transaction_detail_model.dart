@@ -1,8 +1,8 @@
-import 'reports_page.dart' show ReportsPageWidget;
+import 'transaction_detail_page.dart' show TransactionDetailPageWidget;
 import 'package:flutter/material.dart';
 
 
-class ReportsPageModel {
+class TransactionDetailModel {
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for TextField widget.

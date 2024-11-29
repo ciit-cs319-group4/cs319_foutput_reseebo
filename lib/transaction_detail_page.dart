@@ -1,26 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
+import 'package:go_router/go_router.dart';
 
-import 'reports_page_model.dart';
-export 'reports_page_model.dart';
+import 'transaction_detail_model.dart';
+export 'transaction_detail_model.dart';
 
-class ReportsPageWidget extends StatefulWidget {
-  const ReportsPageWidget({super.key});
+class TransactionDetailPageWidget extends StatefulWidget {
+  const TransactionDetailPageWidget({super.key});
 
   @override
-  State<ReportsPageWidget> createState() => _ReportsPageWidgetState();
+  State<TransactionDetailPageWidget> createState() => _TransactionDetailPageWidgetState();
 }
 
-class _ReportsPageWidgetState extends State<ReportsPageWidget> {
-  late ReportsPageModel _model;
+class _TransactionDetailPageWidgetState extends State<TransactionDetailPageWidget> {
+  late TransactionDetailModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = ReportsPageModel();
+    _model = TransactionDetailModel();
 
     _model.textController1 ??= TextEditingController();
     _model.textFieldFocusNode1 ??= FocusNode();
@@ -64,7 +63,7 @@ class _ReportsPageWidgetState extends State<ReportsPageWidget> {
                 size: 30,
               ),
               onPressed: () async {
-                Navigator.pushNamed(context, '/home'); //Error pag clinick back button
+                context.go('/home'); //Error pag clinick back button
               },
             ),
           ),
@@ -177,6 +176,7 @@ class _ReportsPageWidgetState extends State<ReportsPageWidget> {
                               width: 350,
                               child: TextFormField(
                                 controller: _model.textController1,
+                                readOnly: true,
                                 focusNode: _model.textFieldFocusNode1,
                                 autofocus: false,
                                 obscureText: false,
@@ -290,6 +290,7 @@ class _ReportsPageWidgetState extends State<ReportsPageWidget> {
                                 child: TextFormField(
                                   controller: _model.textController2,
                                   focusNode: _model.textFieldFocusNode2,
+                                  readOnly: true,
                                   autofocus: false,
                                   obscureText: false,
                                   decoration: InputDecoration(

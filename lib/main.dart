@@ -7,7 +7,7 @@ import 'package:cs319_foutput_reseebo/login_page.dart';
 import 'package:cs319_foutput_reseebo/signup_page.dart';
 import 'package:cs319_foutput_reseebo/start.dart';
 import 'package:cs319_foutput_reseebo/user_page.dart';
-import 'package:cs319_foutput_reseebo/reports_page.dart';
+import 'package:cs319_foutput_reseebo/transaction_detail_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:go_router/go_router.dart';
 import 'firebase_options.dart';
@@ -78,7 +78,7 @@ class MyApp extends StatelessWidget {
           ),
           GoRoute(
             path: '/reports',
-            builder: (context, state) => const ReportsPageWidget(),
+            builder: (context, state) => const TransactionDetailPageWidget(),
           ),
           GoRoute(
             path: '/edit',
