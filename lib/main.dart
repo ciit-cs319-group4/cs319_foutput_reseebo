@@ -1,4 +1,3 @@
-import 'package:cs319_foutput_reseebo/currency_page.dart';
 import 'package:cs319_foutput_reseebo/expense_page.dart';
 import 'package:cs319_foutput_reseebo/home_page.dart';
 import 'package:cs319_foutput_reseebo/homepage_scaffold.dart';
@@ -10,6 +9,7 @@ import 'package:cs319_foutput_reseebo/user_page.dart';
 import 'package:cs319_foutput_reseebo/transaction_detail_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:go_router/go_router.dart';
+import 'financial_reports_page.dart';
 import 'firebase_options.dart';
 import 'package:cs319_foutput_reseebo/edit_page.dart';
 import 'package:flutter/material.dart';
