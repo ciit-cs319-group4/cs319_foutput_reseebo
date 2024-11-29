@@ -23,6 +23,7 @@ class HomepageScaffold extends StatelessWidget {
           ],
         ),
         child: BottomNavigationBar(
+          backgroundColor: Colors.white,
           currentIndex: _calculateSelectedIndex(context),
           onTap: (index) => _onTap(context, index),
           elevation: 0,
