@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
+import 'package:go_router/go_router.dart';
 
-import 'start_model.dart';
 export 'start_model.dart';
 
 class StartWidget extends StatefulWidget {
@@ -79,7 +77,7 @@ class _StartWidgetState extends State<StartWidget> {
                         width: 250,
                         child: ElevatedButton(
                           onPressed: () {
-                            Navigator.pushNamed(context,'/signup');
+                            context.go('/signup');
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Color(0xFF2E5B59),
@@ -100,7 +98,7 @@ class _StartWidgetState extends State<StartWidget> {
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.pushNamed(context,'/login');
+                          context.go('/login');
                         },
                         child: Text.rich(
                           TextSpan(

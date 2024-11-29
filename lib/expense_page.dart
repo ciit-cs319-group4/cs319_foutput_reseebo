@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
+import 'package:go_router/go_router.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 
 import 'expense_page_model.dart';
 export 'expense_page_model.dart';
@@ -69,7 +67,7 @@ class _ExpensePageWidgetState extends State<ExpensePageWidget> {
         SnackBar(content: Text('Expense added successfully!')),
       );
 
-      Navigator.pushNamed(context, '/home');
+      context.replace('/home');
 
       // Clear input fields after successful submission
       _model.textController1?.clear();
@@ -110,7 +108,7 @@ class _ExpensePageWidgetState extends State<ExpensePageWidget> {
                 size: 30,
               ),
               onPressed: () async {
-                Navigator.pop(context); // Flutter's Navigator.pop(context)
+                context.go('/home'); // Flutter's Navigator.pop(context)
               },
             ),
           ),

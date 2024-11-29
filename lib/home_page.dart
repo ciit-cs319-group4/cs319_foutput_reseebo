@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:go_router/go_router.dart';
 import 'transaction.dart' as txn; 
 
 class HomePageWidget extends StatefulWidget {
@@ -11,6 +13,7 @@ class HomePageWidget extends StatefulWidget {
 
 class _HomePageWidgetState extends State<HomePageWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final user = FirebaseAuth.instance.currentUser;
 
   // Alert dialogue for delete activity button
   void _showDeleteDialogue(DocumentSnapshot doc) {
@@ -128,8 +131,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         child: const Icon(Icons.add,
                             color: Color(0xFF347571), size: 16),
                         onPressed: () {
-                          Navigator.pushNamed(context,
-                              '/income'); // Navigate to add income page
+                          context.go('/income'); // Navigate to add income page
                         },
                       ),
                     ),
@@ -159,8 +161,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       child: const Icon(Icons.remove,
                           color: Color(0xFF347571), size: 16),
                       onPressed: () {
-                        Navigator.pushNamed(context,
-                            '/expense'); // Navigate to add expense page
+                        context.go('/expense'); // Navigate to add expense page
                       },
                     ),
                     const SizedBox(width: 8),
@@ -200,7 +201,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Activities',
+                                'Recent Transactions',
                                 style: TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.bold),
                               ),
@@ -211,6 +212,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           child: StreamBuilder<QuerySnapshot>(
                             stream: FirebaseFirestore.instance
                                 .collection('transactions')
+                                .where('created_by', isEqualTo: user!.uid)
                                 .orderBy('timestamp', descending: true)
                                 .snapshots(),
                             builder: (context, snapshot) {
@@ -224,7 +226,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               if (!snapshot.hasData ||
                                   snapshot.data!.docs.isEmpty) {
                                 return Center(
-                                  child: Text('No activities yet.'),
+                                  child: Text('No transactions yet.'),
                                 );
                               }
 
@@ -268,16 +270,15 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                             //experiment only
                                             final transactionData = transactions[index];
                                             final transaction = txn.Transaction(
-                                            uid: transactionData.id,
-                                            amount: transactionData['amount'],
-                                            title: transactionData['title'],
-                                            description: transactionData['description'],
-                                          );
-
-                                            Navigator.pushNamed(
-                                              context,
-                                              '/edit', arguments: transaction, // Navigate to your edit screen
+                                              uid: transactionData.id,
+                                              amount: transactionData['amount'],
+                                              title: transactionData['title'],
+                                              description: transactionData['description'],
                                             );
+
+                                            context.go('/edit', extra: {
+                                              'transactionData': transaction,
+                                            });
                                           },
                                         ),
                                         // Delete button
@@ -305,43 +306,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     ),
                   ),
                 ),
-              ),
-            ],
-          ),
-        ),
-        bottomNavigationBar: Container(
-          height: 64,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                blurRadius: 4,
-                color: const Color(0x33000000),
-                offset: const Offset(0, -2),
-              )
-            ],
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              IconButton(
-                icon: Icon(Icons.bar_chart, color: Color(0xFF001A47), size: 32),
-                onPressed: () {
-                  // Navigate to bar chart page
-                },
-              ),
-              IconButton(
-                icon: Icon(Icons.home, color: Color(0xFF001A47), size: 32),
-                onPressed: () {
-                  Navigator.pushNamed(context, '/home'); // Navigate to home
-                },
-              ),
-              IconButton(
-                icon: Icon(Icons.person, color: Color(0xFF001A47), size: 32),
-                onPressed: () {
-                  Navigator.pushNamed(
-                      context, '/user'); // Navigate to user profile
-                },
               ),
             ],
           ),

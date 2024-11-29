@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:go_router/go_router.dart';
 import 'transaction.dart' as txn;
 
-import 'edit_page_model.dart';
 export 'edit_page_model.dart';
 
 class EditPageWidget extends StatefulWidget {
-  const EditPageWidget({super.key});
+  final txn.Transaction transactionData;
+  const EditPageWidget({super.key, required this.transactionData});
 
   @override
   State<EditPageWidget> createState() => _EditPageWidgetState();
@@ -36,24 +35,10 @@ class _EditPageWidgetState extends State<EditPageWidget> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    final args = ModalRoute.of(context)?.settings.arguments;
-
-    if (args is txn.Transaction) {
-      transaction = args;
-
       // Populate controllers with transaction data
-      _titleController.text = transaction.title;
-      _descriptionController.text = transaction.description;
-      _amountController.text = transaction.amount.toString();
-    } else {
-      // Defer showing the SnackBar
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (mounted) {
-          _showErrorSnackBar('Invalid transaction data.');
-          Navigator.pop(context); // Navigate back if invalid
-        }
-      });
-    }
+      _titleController.text = widget.transactionData.title;
+      _descriptionController.text = widget.transactionData.description;
+      _amountController.text = widget.transactionData.amount.toString();
   }
 
   @override
@@ -71,44 +56,46 @@ class _EditPageWidgetState extends State<EditPageWidget> {
   }
 
   Future<void> _updateTransaction() async {
-    if (_formKey.currentState?.validate() ?? false) {
-      final title = _titleController.text.trim();
-      final description = _descriptionController.text.trim();
-      final amountText = _amountController.text.trim();
 
-      if (title.isEmpty || description.isEmpty || amountText.isEmpty) {
-        _showErrorSnackBar('Please fill in all fields.');
-        return;
-      }
+    final title = _titleController.text.trim();
+    final description = _descriptionController.text.trim();
+    final amountText = _amountController.text.trim();
+    final transaction = widget.transactionData;
 
-      final amount = double.tryParse(amountText);
-      if (amount == null) {
-        _showErrorSnackBar('Invalid amount entered.');
-        return;
-      }
 
-      transaction.title = title;
-      transaction.description = description;
-      transaction.amount = amount;
-
-      try {
-        await FirebaseFirestore.instance
-            .collection('transactions')
-            .doc(transaction.uid)
-            .update({
-          'title': transaction.title,
-          'description': transaction.description,
-          'amount': transaction.amount,
-        });
-
-        _showErrorSnackBar('Transaction updated successfully!');
-        Navigator.pop(context, transaction);
-      } catch (e) {
-        _showErrorSnackBar('Failed to update transaction: $e');
-      }
+    if (title.isEmpty || description.isEmpty || amountText.isEmpty) {
+      _showErrorSnackBar('Please fill in all fields.');
+      return;
     }
+
+    final amount = double.tryParse(amountText);
+    if (amount == null) {
+      _showErrorSnackBar('Invalid amount entered.');
+      return;
+    }
+
+    transaction.title = title;
+    transaction.description = description;
+    transaction.amount = amount;
+
+    try {
+      await FirebaseFirestore.instance
+          .collection('transactions')
+          .doc(transaction.uid)
+          .update({
+        'title': transaction.title,
+        'description': transaction.description,
+        'amount': transaction.amount,
+      });
+
+      _showErrorSnackBar('Transaction updated successfully!');
+      context.replace('/home');
+    } catch (e) {
+      _showErrorSnackBar('Failed to update transaction: $e');
+    }
+
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -137,12 +124,12 @@ class _EditPageWidgetState extends State<EditPageWidget> {
                 size: 30,
               ),
               onPressed: () async {
-                Navigator.pop(context); // Flutter's Navigator.pop(context)
+                context.replace('/home');
               },
             ),
           ),
           title: Text(
-            'Edit Activity',
+            'Edit Transaction',
             style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                   fontFamily: 'Inter Tight',
                   color: Colors.white,
@@ -264,7 +251,7 @@ class _EditPageWidgetState extends State<EditPageWidget> {
                               Align(
                                 alignment: AlignmentDirectional(-0.75, 0),
                                 child: Text(
-                                  'Update Activity',
+                                  'Update Transaction',
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyMedium
@@ -296,7 +283,7 @@ class _EditPageWidgetState extends State<EditPageWidget> {
                                               EdgeInsetsDirectional.fromSTEB(
                                                   0, 0, 0, 4),
                                           child: Text(
-                                            'Activity Amount',
+                                            'Transaction Amount',
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .bodyMedium
@@ -414,7 +401,7 @@ class _EditPageWidgetState extends State<EditPageWidget> {
                                               EdgeInsetsDirectional.fromSTEB(
                                                   0, 0, 0, 4),
                                           child: Text(
-                                            'Activity Title',
+                                            'Transaction Title',
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .bodyMedium
@@ -628,11 +615,12 @@ class _EditPageWidgetState extends State<EditPageWidget> {
                                   ),
                                 ),
                               ),
-                              Padding( 
+                              Padding(
                                 padding:
                                     EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
                                 child: ElevatedButton(
                                   onPressed: () {
+                                    debugPrint("Hek");
                                     _updateTransaction();
                                   },
                                   style: ElevatedButton.styleFrom(

@@ -1,5 +1,8 @@
+import 'package:cs319_foutput_reseebo/edit_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import 'user_page_model.dart';
@@ -30,6 +33,17 @@ class _UserPageWidgetState extends State<UserPageWidget> {
     super.dispose();
   }
 
+  Future<void> _handleUserLogout() async {
+    await FirebaseAuth.instance.signOut();
+
+    if (FirebaseAuth.instance.currentUser == null) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: const Text('You have logged out successfully.')));
+
+      context.replace('/');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -54,18 +68,20 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      SizedBox(height: 20), // Add space above the content
+                      SizedBox(height: 20),
+                      // Add space above the content
                       Align(
                         alignment: AlignmentDirectional(0, 0),
                         child: Text(
                           'Username',
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                fontFamily: 'Inter',
-                                color: Color.fromRGBO(52, 117, 113, 1),
-                                fontSize: 40,
-                                letterSpacing: 0.0,
-                                fontWeight: FontWeight.bold,
-                              ),
+                          style:
+                              Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    fontFamily: 'Inter',
+                                    color: Color.fromRGBO(52, 117, 113, 1),
+                                    fontSize: 40,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                         ),
                       ),
                       Divider(
@@ -78,12 +94,13 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
                         child: Text(
                           'Useremail@samplemail.com',
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                fontFamily: 'Inter',
-                                color: Color(0xFF001A47),
-                                fontSize: 16,
-                                letterSpacing: 0.0,
-                              ),
+                          style:
+                              Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    fontFamily: 'Inter',
+                                    color: Color(0xFF001A47),
+                                    fontSize: 16,
+                                    letterSpacing: 0.0,
+                                  ),
                         ),
                       ),
                       Padding(
@@ -94,7 +111,10 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                           children: [
                             Text(
                               'Member since: ',
-                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.copyWith(
                                     fontFamily: 'Inter',
                                     color: Color(0xFF001A47),
                                     fontSize: 16,
@@ -103,7 +123,10 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                             ),
                             Text(
                               '##/##/####',
-                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.copyWith(
                                     fontFamily: 'Inter',
                                     color: Color(0xFF001A47),
                                     fontSize: 16,
@@ -114,7 +137,8 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 20), // Add space between the content and the container
+                      SizedBox(height: 20),
+                      // Add space between the content and the container
                       Container(
                         width: 352,
                         height: 120,
@@ -137,10 +161,14 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                             Align(
                               alignment: AlignmentDirectional(-0.8, -1),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
                                 child: Text(
                                   'Options',
-                                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium
+                                      ?.copyWith(
                                         fontFamily: 'Inter',
                                         color: Color(0xFF001A47),
                                         fontSize: 18,
@@ -151,14 +179,19 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 4),
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 10, 0, 4),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 children: [
                                   Text(
                                     'Currency: ',
-                                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium
+                                        ?.copyWith(
                                           fontFamily: 'Inter',
                                           color: Color(0xFF001A47),
                                           fontSize: 16,
@@ -167,7 +200,10 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                                   ),
                                   Text(
                                     'Philippine Peso',
-                                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium
+                                        ?.copyWith(
                                           fontFamily: 'Inter',
                                           color: Color(0xFF001A47),
                                           fontSize: 16,
@@ -181,7 +217,8 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                                       size: 16,
                                     ),
                                     onPressed: () {
-                                       Navigator.pushNamed(context,'/currency'); // icon button for currency
+                                      Navigator.pushNamed(context,
+                                          '/currency'); // icon button for currency
                                     },
                                   ),
                                 ],
@@ -190,20 +227,20 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 20), // Add space between the container and the button
+                      SizedBox(height: 20),
+                      // Add space between the container and the button
                       ElevatedButton(
-                        onPressed: () {
-                           Navigator.pushNamed(context,'/login'); // logout button
-                        },
+                        onPressed: _handleUserLogout,
                         style: ElevatedButton.styleFrom(
                           minimumSize: Size(180, 40),
                           padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
                           backgroundColor: Color(0xFFDD6B6B),
-                          textStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                                fontFamily: 'Inter Tight',
-                                color: Colors.white,
-                                letterSpacing: 0.0,
-                              ),
+                          textStyle:
+                              Theme.of(context).textTheme.titleSmall?.copyWith(
+                                    fontFamily: 'Inter Tight',
+                                    color: Colors.white,
+                                    letterSpacing: 0.0,
+                                  ),
                           elevation: 0,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(24),
@@ -211,64 +248,13 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                         ),
                         child: Text('Logout'),
                       ),
-                      SizedBox(height: 20), // Add space below the button
+                      SizedBox(height: 20),
+                      // Add space below the button
                     ],
                   ),
                 ),
               ),
-              SafeArea(
-                child: Align(
-                  alignment: AlignmentDirectional(0, 0),
-                  child: Container(
-                    width: 524,
-                    height: 64,
-                    constraints: BoxConstraints(
-                      minHeight: MediaQuery.sizeOf(context).height * 0.1,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 4,
-                          color: Color(0x33000000),
-                          offset: Offset(
-                            0,
-                            -2,
-                          ),
-                        )
-                      ],
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        IconButton(
-                          icon: const Icon(Icons.bar_chart,
-                              color: Color(0xFF001A47), size: 32),
-                          onPressed: () {
-                             Navigator.pushNamed(context,'/income'); //Bar chart
-                          },
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.home,
-                              color: Color(0xFF001A47), size: 32), // Home
-                          onPressed: () {
-                             Navigator.pushNamed(context,'/home');
-                          },
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.person,
-                              color: Color(0xFF001A47), size: 32), // User profile
-                          onPressed: () {
-                             Navigator.pushNamed(context,'/user');
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              ],
+            ],
           ),
         ),
       ),

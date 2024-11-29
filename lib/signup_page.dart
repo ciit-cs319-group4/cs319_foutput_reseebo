@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:go_router/go_router.dart';
 
-import 'signup_page_model.dart';
 export 'signup_page_model.dart';
 
 class SignupPageWidget extends StatefulWidget {
@@ -74,7 +74,7 @@ class _SignupPageWidgetState extends State<SignupPageWidget> {
       });
 
       // Navigate to the home page after successful sign-up
-      Navigator.pushNamed(context, '/home');
+      context.go('/home');
     } catch (e) {
       String errorMessage = 'An error occurred';
       if (e is FirebaseAuthException) {
@@ -200,7 +200,7 @@ class _SignupPageWidgetState extends State<SignupPageWidget> {
                                   ),
                                   TextButton(
                                     onPressed: () {
-                                      Navigator.pushNamed(context, '/login');
+                                      context.go('/login');
                                     },
                                     child: Text(
                                       'Login',

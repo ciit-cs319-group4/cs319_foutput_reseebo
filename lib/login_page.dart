@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
+import 'package:go_router/go_router.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'login_page_model.dart';
 export 'login_page_model.dart';
 
 class LoginPageWidget extends StatefulWidget {
@@ -37,7 +35,10 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
     final email = emailController?.text.trim();
     final password = passwordController?.text.trim();
 
-    if (email == null || password == null || email.isEmpty || password.isEmpty) {
+    if (email == null ||
+        password == null ||
+        email.isEmpty ||
+        password.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Please fill in all fields')),
       );
@@ -49,7 +50,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
         email: email,
         password: password,
       );
-      Navigator.pushNamed(context, '/home');
+      context.go('/home');
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error: ${e.toString()}')),
@@ -102,7 +103,10 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                               children: [
                                 Text(
                                   'RESEEBO',
-                                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium
+                                      ?.copyWith(
                                         fontFamily: 'Inter',
                                         color: Colors.white,
                                         fontSize: 52,
@@ -280,13 +284,15 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
                             child: ElevatedButton(
                               onPressed: _loginWithEmailAndPassword,
                               style: ElevatedButton.styleFrom(
-                                minimumSize: Size(150, 45), 
-                                padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
-                                backgroundColor: Color(0xFF347571), 
+                                minimumSize: Size(150, 45),
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    16, 0, 16, 0),
+                                backgroundColor: Color(0xFF347571),
                                 elevation: 0,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(24),
@@ -322,7 +328,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                               ),
                               InkWell(
                                 onTap: () {
-                                  Navigator.pushNamed(context, '/signup');
+                                 context.go('/signup');
                                 },
                                 child: Text(
                                   'Sign Up',
