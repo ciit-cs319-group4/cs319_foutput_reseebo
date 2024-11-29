@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart'; 
 
 import 'user_page_model.dart';
 export 'user_page_model.dart';
@@ -14,21 +16,12 @@ class UserPageWidget extends StatefulWidget {
 
 class _UserPageWidgetState extends State<UserPageWidget> {
   late UserPageModel _model;
+  String? username;
+  String? email;
+  String? date;
+  final user = FirebaseAuth.instance.currentUser;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-
-  @override
-  void initState() {
-    super.initState();
-    _model = UserPageModel();
-  }
-
-  @override
-  void dispose() {
-    _model.dispose();
-
-    super.dispose();
-  }
 
   Future<void> _handleUserLogout() async {
     await FirebaseAuth.instance.signOut();
@@ -39,6 +32,43 @@ class _UserPageWidgetState extends State<UserPageWidget> {
 
       context.replace('/');
     }
+  }
+
+   // function for fetching username in the firestorefirebase
+  Future<void> fetchUserData() async {
+    if (user != null) {
+      try {
+        final doc = await FirebaseFirestore.instance
+            .collection('users')
+            .doc(user!.uid) // get the uid of the user
+            .get(); // retrieves the username
+
+        final userData = doc.data();
+
+        setState(() {
+          username = userData? ['username'] ?? 'Username'; // Assign username or fallback
+          email = userData? ['email'] ?? 'Sample@com';
+          date = userData?['createdAt'] != null ? DateFormat('MMMM d, yyyy').format(userData?['createdAt'].toDate()): 'date'; // Format the date or fallback to 'date'
+        });
+      } catch (e) {
+        print('Error fetching username: $e');
+      }
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fetchUserData(); // Fetch the username 
+    
+    _model = UserPageModel();
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    super.dispose();
   }
 
   @override
@@ -70,7 +100,7 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                       Align(
                         alignment: AlignmentDirectional(0, 0),
                         child: Text(
-                          'Username',
+                          '${username ?? 'Username'}',
                           style:
                               Theme.of(context).textTheme.bodyMedium?.copyWith(
                                     fontFamily: 'Inter',
@@ -90,7 +120,7 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
                         child: Text(
-                          'Useremail@samplemail.com',
+                          '${email ?? 'Sample@com'}',
                           style:
                               Theme.of(context).textTheme.bodyMedium?.copyWith(
                                     fontFamily: 'Inter',
@@ -119,7 +149,7 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                                   ),
                             ),
                             Text(
-                              '##/##/####',
+                              '${date ?? 'date'}',
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyMedium

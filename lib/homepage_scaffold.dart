@@ -11,7 +11,7 @@ class HomepageScaffold extends StatelessWidget {
     return Scaffold(
       body: child,
       bottomNavigationBar: Container(
-        height: 64,
+        height: 68, // adjusted a bit to fix the overflow layoout
         decoration: BoxDecoration(
           color: Colors.white,
           boxShadow: [
@@ -49,7 +49,7 @@ class HomepageScaffold extends StatelessWidget {
 
   int _calculateSelectedIndex(BuildContext context) {
     final String? location = GoRouter.of(context).state?.path;
-    if (location!.startsWith('/null')) return 0;
+    if (location!.startsWith('/reports')) return 0;
     if (location.startsWith('/home')) return 1;
     if (location.startsWith('/user')) return 2;
     return 0;
@@ -58,7 +58,7 @@ class HomepageScaffold extends StatelessWidget {
   void _onTap(BuildContext context, int index) {
     switch (index) {
       case 0:
-        context.go('/null');
+        context.go('/reports');
         break;
       case 1:
         context.go('/home');

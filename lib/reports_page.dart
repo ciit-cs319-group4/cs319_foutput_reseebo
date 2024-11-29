@@ -64,7 +64,7 @@ class _ReportsPageWidgetState extends State<ReportsPageWidget> {
                 size: 30,
               ),
               onPressed: () async {
-                Navigator.pop(context); // Flutter's Navigator.pop(context)
+                Navigator.pushNamed(context, '/home'); //Error pag clinick back button
               },
             ),
           ),
@@ -91,7 +91,7 @@ class _ReportsPageWidgetState extends State<ReportsPageWidget> {
                 height: 473,
                 constraints: BoxConstraints(
                   minWidth: MediaQuery.sizeOf(context).width,
-                  minHeight: MediaQuery.sizeOf(context).height * 1,
+                  minHeight: MediaQuery.sizeOf(context).height * 0.9,
                   maxWidth: 600,
                 ),
                 decoration: BoxDecoration(

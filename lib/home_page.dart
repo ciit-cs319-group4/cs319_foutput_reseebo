@@ -14,6 +14,8 @@ class HomePageWidget extends StatefulWidget {
 class _HomePageWidgetState extends State<HomePageWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final user = FirebaseAuth.instance.currentUser;
+  String? username; // added for fetching the username
+  double currentBalance = 0.0; // added for fetching the current balance 
 
   // Alert dialogue for delete activity button
   void _showDeleteDialogue(DocumentSnapshot doc) {
@@ -48,6 +50,63 @@ class _HomePageWidgetState extends State<HomePageWidget> {
     );
   }
 
+  // function for fetching username in the firestorefirebase
+  Future<void> fetchUsername() async {
+    if (user != null) {
+      try {
+        final doc = await FirebaseFirestore.instance
+            .collection('users')
+            .doc(user!.uid) // get the uid of the user
+            .get(); // retrieves the username
+
+        setState(() {
+          username = doc.data()?['username'] ?? 'Username'; // Assign username or fallback
+        });
+      } catch (e) {
+        print('Error fetching username: $e');
+      }
+    }
+  }
+
+  // function for fetching the current balance in the firestorefirebase
+  Future<void> fetchBalance() async {
+  if (user != null) {
+    try {
+      final querySnapshot = await FirebaseFirestore.instance
+          .collection('transactions')
+          .where('created_by', isEqualTo: user!.uid)
+          .get();
+
+      double balance = 0.0;
+
+      for (var doc in querySnapshot.docs) {
+        final data = doc.data();
+        final amount = data['amount']?.toDouble() ?? 0.0;
+        final type = data['type']?.toString().toUpperCase() ?? '';
+
+        if (type == 'INCOME') {
+          balance += amount; // Add income
+        } else if (type == 'EXPENSE') {
+          balance -= amount; // Subtract expense
+        }
+      }
+
+      setState(() {
+        currentBalance = balance;
+      });
+    } catch (e) {
+      print('Error fetching balance: $e');
+    }
+  }
+}
+
+   @override
+  void initState() {
+    super.initState();
+    fetchUsername(); // Fetch the username 
+    fetchBalance(); // fetch the current balacne
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -62,7 +121,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  'Hello, Username!',
+                  'Hello, ${username ?? 'Username'}!',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -99,7 +158,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       ),
                       SizedBox(height: 8),
                       Text(
-                        'PHP 00,000.00',
+                        'PHP ${currentBalance.toStringAsFixed(2)}', // Display dynamic balance
                         style: TextStyle(
                           fontSize: 36,
                           fontWeight: FontWeight.bold,
