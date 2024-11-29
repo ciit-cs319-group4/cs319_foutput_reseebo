@@ -164,78 +164,7 @@ class _EditPageWidgetState extends State<EditPageWidget> {
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 18, 0, 36),
                           child: Container(
-                            width: 352,
-                            height: 99,
-                            decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 4,
-                                  color: Color(0x33000000),
-                                  offset: Offset(
-                                    0.0,
-                                    2,
-                                  ),
-                                  spreadRadius: 3,
-                                )
-                              ],
-                              gradient: LinearGradient(
-                                colors: [Color(0xFF68D698), Color(0xFFCCF997)],
-                                stops: [0, 0.8],
-                                begin: AlignmentDirectional(0.87, 1),
-                                end: AlignmentDirectional(-0.87, -1),
-                              ),
-                              borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(10),
-                                bottomRight: Radius.circular(10),
-                                topLeft: Radius.circular(10),
-                                topRight: Radius.circular(10),
-                              ),
-                            ),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Align(
-                                  alignment: AlignmentDirectional(-1, -1),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        15, 14, 0, 0),
-                                    child: Text(
-                                      'Your Current Balance',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium
-                                          ?.copyWith(
-                                            fontFamily: 'Inter',
-                                            color: Color(0xFF285653),
-                                            fontSize: 12,
-                                            letterSpacing: 0.0,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                    ),
-                                  ),
-                                ),
-                                Align(
-                                  alignment: AlignmentDirectional(0, 0),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 8, 0, 0),
-                                    child: Text(
-                                      'PHP 00,000.00',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium
-                                          ?.copyWith(
-                                            fontFamily: 'Inter',
-                                            color: Color(0xFF001A47),
-                                            fontSize: 36,
-                                            letterSpacing: 0.0,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
+                            height: 20,
                           ),
                         ),
                         Container(
