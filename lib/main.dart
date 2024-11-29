@@ -1,6 +1,5 @@
 import 'package:cs319_foutput_reseebo/currency_page.dart';
 import 'package:cs319_foutput_reseebo/expense_page.dart';
-import 'package:cs319_foutput_reseebo/financial_reports_page.dart';
 import 'package:cs319_foutput_reseebo/home_page.dart';
 import 'package:cs319_foutput_reseebo/homepage_scaffold.dart';
 import 'package:cs319_foutput_reseebo/income_page.dart';
@@ -78,8 +77,8 @@ class MyApp extends StatelessWidget {
             builder: (context, state) => const ExpensePageWidget(),
           ),
           GoRoute(
-            path: '/currency',
-            builder: (context, state) => const CurrencyPageWidget(),
+            path: '/reports',
+            builder: (context, state) => const TransactionDetailPageWidget(),
           ),
           GoRoute(
             path: '/edit',
