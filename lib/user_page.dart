@@ -1,9 +1,6 @@
-import 'package:cs319_foutput_reseebo/edit_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
 
 import 'user_page_model.dart';
 export 'user_page_model.dart';

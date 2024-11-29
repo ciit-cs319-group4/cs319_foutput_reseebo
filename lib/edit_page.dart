@@ -14,7 +14,6 @@ class EditPageWidget extends StatefulWidget {
 }
 
 class _EditPageWidgetState extends State<EditPageWidget> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
   late TextEditingController _titleController;
   late TextEditingController _descriptionController;
