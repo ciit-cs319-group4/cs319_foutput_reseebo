@@ -169,18 +169,6 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                       Container(
                         width: 352,
                         height: 120,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 4,
-                              color: Color(0x33000000),
-                              offset: Offset(0, 2),
-                              spreadRadius: 2,
-                            )
-                          ],
-                          borderRadius: BorderRadius.circular(10),
-                        ),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -190,66 +178,11 @@ class _UserPageWidgetState extends State<UserPageWidget> {
                               child: Padding(
                                 padding:
                                     EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
-                                child: Text(
-                                  'Options',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyMedium
-                                      ?.copyWith(
-                                        fontFamily: 'Inter',
-                                        color: Color(0xFF001A47),
-                                        fontSize: 18,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                ),
                               ),
                             ),
                             Padding(
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(0, 10, 0, 4),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Text(
-                                    'Currency: ',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium
-                                        ?.copyWith(
-                                          fontFamily: 'Inter',
-                                          color: Color(0xFF001A47),
-                                          fontSize: 16,
-                                          letterSpacing: 0.0,
-                                        ),
-                                  ),
-                                  Text(
-                                    'Philippine Peso',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium
-                                        ?.copyWith(
-                                          fontFamily: 'Inter',
-                                          color: Color(0xFF001A47),
-                                          fontSize: 16,
-                                          letterSpacing: 0.0,
-                                        ),
-                                  ),
-                                  IconButton(
-                                    icon: Icon(
-                                      Icons.arrow_forward_ios,
-                                      color: Color(0xFF347571),
-                                      size: 16,
-                                    ),
-                                    onPressed: () {
-                                      Navigator.pushNamed(context,
-                                          '/currency'); // icon button for currency
-                                    },
-                                  ),
-                                ],
-                              ),
                             ),
                           ],
                         ),
