@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "554457442944",
+    "project_id": "cs319-reseebo-foutput",
+    "storage_bucket": "cs319-reseebo-foutput.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:554457442944:android:09b6e9c39cc1e4f1d05465",
+        "android_client_info": {
+          "package_name": "ciit.cs319.reseebo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJd2xmwkxO6YF8lrrGW9JKggUz2nMdjic"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
